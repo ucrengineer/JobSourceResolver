@@ -6,17 +6,36 @@ import {CardModule} from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import {FileUploadModule} from 'primeng/fileupload';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { RouterModule, Routes } from '@angular/router';
+import { JobUploadComponent } from './upload/job-upload/job-upload.component';
+
+
+const appRoutes: Routes = [
+  { path: 'homepage', component: HomepageComponent},
+  {path: 'job-upload',component: JobUploadComponent}
+];
+
 @NgModule({
   declarations: [
     AppComponent,
-    HomepageComponent
+    HomepageComponent,
+    JobUploadComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     CardModule,
-    ButtonModule
+    ButtonModule,
+    FileUploadModule,
+    ProgressSpinnerModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
+
 
   ],
   providers: [],

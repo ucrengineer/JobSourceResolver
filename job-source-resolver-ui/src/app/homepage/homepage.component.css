@@ -1,0 +1,75 @@
+.card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-img-wrapper {
+    height: 50%;
+    width: 50%;
+    /* height: 200px; */
+    overflow: hidden;
+    position: relative;
+    display: block;
+    max-width: 100%;
+    margin-left: calc(25%)
+}
+
+.card:hover img {
+    transform: scale(1.1, 1.1);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+    /* height: 200px; */
+    height: 100%;
+    opacity: 0.8;
+}
+
+.card img {
+    transform: scale(1, 1);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+    /* height: 200px; */
+    height: 100%;
+}
+
+.card {
+    height: 100%
+}
+
+.member-icons {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.text-responsive {
+    font-size: calc(60% + 0.01vw + 0.01vh);
+}
+
+#tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+#tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+#tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+#homepage {
+    background-color: lightgray;
+}

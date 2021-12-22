@@ -1,14 +1,40 @@
-<p>homepage works!</p>
+<div id="homepage" class="p-5">
 
-<!-- <link href="/JobSourceResolver/job-source-resolver-ui/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"> -->
-<div class="row">
-    <div *ngFor="let board of boards" class=" col-sm-4 p-3">
-        <div class="card">
-            <img class="card-img-top" src={{board.logo_file}} alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+
+    <div class="row m-3">
+        <div class="col-sm-6">
+            <h1>Job Sources Board</h1>
+        </div>
+        <div class="col-sm-6 text-right">
+            <a routerLink="/job-upload" routerLinkActive="active">Upload Job CSV</a>
+        </div>
+
+    </div>
+    <!-- <link href="/JobSourceResolver/job-source-resolver-ui/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"> -->
+    <div class="row">
+        <div *ngFor="let board of boards" class=" col-sm-4 p-3">
+
+            <div class="card">
+                <h5 class="text-center bg-light">{{board.name}}</h5>
+
+
+                <a routerLink="/home" routerLinkActive="active" class="card-img-wrapper ">
+                    <img class="card-img-top" src={{board.logo_file}} alt="">
+
+                </a>
+
+                <div class="card-body text-center">
+                    <p class="card-text">{{board.description}}</p>
+                </div>
+
+
+                <div class="container">
+                    <div class="row text-center font-weight-bold">
+                        <p class="card-text"><small class="text-muted">{{board.rating}}</small></p>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
