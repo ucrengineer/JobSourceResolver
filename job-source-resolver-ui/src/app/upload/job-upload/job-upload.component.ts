@@ -9,6 +9,7 @@ import { JobOpportunity } from 'src/app/models/JobOpportunity';
 import { sourceDict } from 'src/app/models/sourceDict.model';
 import { JobBoardsService } from 'src/app/services/job-boards/job-boards';
 import { JobOpportunitiesService } from 'src/app/services/job-opportunities/job-opportunities.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class JobUploadComponent implements OnInit {
   boards : jobBoards[] = [];
 
   header = false;
-  constructor(private ngxCsvParser: NgxCsvParser, private jobOppService: JobOpportunitiesService, private boardService : JobBoardsService) { }
+  constructor(private ngxCsvParser: NgxCsvParser, private jobOppService: JobOpportunitiesService,
+    private boardService : JobBoardsService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -46,7 +48,7 @@ export class JobUploadComponent implements OnInit {
     this.ngxCsvParser.parse(files[0], { header: this.header, delimiter: ',' })
       .pipe().subscribe((result: Array<JobOpportunity>) => {
 
-      // console.log('Result', result);
+        // get the columns of the csv file
         this.csvRecords = result;
         this.csvRecords.shift();
 
@@ -77,14 +79,14 @@ export class JobUploadComponent implements OnInit {
         })
 
 
-        //this.jobOppService(this.jobOpps).
-        this.jobOppService.put(this.jobOpps).subscribe()
+        this.jobOppService.put(this.jobOpps).subscribe(()=>{},
+        (err)=> {this.toastr.error(err)},
+        ()=> {this.toastr.success('Upload Complete')})
 
-       // console.log(this.primaryId, this.jobTitle,this.companyName,this.companyURL)
       },
 
       (error: NgxCSVParserError) => {
-        console.log('Error', error);
+        this.toastr.error( error.message);
       });
 
 
@@ -98,5 +100,6 @@ export class JobUploadComponent implements OnInit {
 
 
   }
+
 
   }

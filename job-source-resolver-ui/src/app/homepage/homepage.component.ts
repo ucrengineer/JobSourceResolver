@@ -21,10 +21,13 @@ export class HomepageComponent implements OnInit {
   constructor(private jobBoardService: JobBoardsService, private jobOppService: JobOpportunitiesService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    // get job boards from json
     this.jobBoardService.get().subscribe((x) => {this.boards = x},
       err => console.log('HTTP ERROR', err),
       () => console.log('HTTP request completed')
       )
+      // get job opportunities
     this.jobOppService.get().subscribe((opportunities) =>
     {
         this.jobOpportunities = opportunities;
@@ -52,11 +55,13 @@ export class HomepageComponent implements OnInit {
     }
   }
 
+  //return number of opportunties
   numberOfOpp(company_url){
 
    return getNumber(this.jobOpportunities,company_url)
   }
 
+  // return job opportunties that relate to job source
  getJobOpps(company_url){
 
    return getJobs(this.jobOpportunities,company_url)

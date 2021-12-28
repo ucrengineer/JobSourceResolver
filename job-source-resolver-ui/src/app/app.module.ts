@@ -14,6 +14,9 @@ import { JobUploadComponent } from './upload/job-upload/job-upload.component';
 import { NgxCsvParserModule } from 'ngx-csv-parser';
 import { JobTableComponent } from './table/job-table/job-table.component';
 import {TableModule} from 'primeng/table';
+
+import { ToastrModule } from 'ngx-toastr';
+
 const appRoutes: Routes = [
   { path: 'homepage', component: HomepageComponent},
   {path: 'job-upload',component: JobUploadComponent},
@@ -38,6 +41,7 @@ const appRoutes: Routes = [
     ProgressSpinnerModule,
     NgxCsvParserModule,
     TableModule,
+    ToastrModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only

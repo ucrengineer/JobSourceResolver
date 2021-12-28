@@ -9,6 +9,7 @@ import {environment} from '../../../environments/environment'
 export class JobBoardsService {
   constructor(private http: HttpClient) { }
 
+  // return job boards from json file
   get(): Observable<jobBoards[]>{
     return this.http.get<jobBoards[]>('assets/jobBoards.json')
   }

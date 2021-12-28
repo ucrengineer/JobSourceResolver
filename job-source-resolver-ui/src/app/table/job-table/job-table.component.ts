@@ -20,8 +20,11 @@ export class JobTableComponent implements OnInit {
   siteDomain : sourceDict = new sourceDict();
 
   ngOnInit(): void {
+
+    // getting which board was selected
     this.board = this.route.snapshot.params['id']
 
+    // if there are no job opp sent then get job opportutnies
     if(history.state['jobOpps']== undefined)
     {
         const domain = this.route.snapshot.params['id'].split(' ').join('_').split('?').join('')
@@ -33,6 +36,7 @@ export class JobTableComponent implements OnInit {
         err => console.log('HTTP ERROR', err),
         () => console.log('HTTP request completed'))
      }
+     // else get job opportunities for table, better for state management
      this.jobOpportunities =history.state['jobOpps']
 
 
