@@ -3,8 +3,8 @@
     <a routerLink="/homepage" routerLinkActive="active">Job Board</a>
 
     <div class="container p-2 ">
-        <h5>Updload New Job Data</h5>
-        <p-fileUpload name="files[]" customUpload="true" (uploadHandler)="readExcel($event,'dfs_raw_data')" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet/*"></p-fileUpload>
+        <h5>Upload New Job Data</h5>
+        <p-fileUpload name="files" customUpload="true" (uploadHandler)="readExcel($event)"></p-fileUpload>
     </div>
 
 </div>

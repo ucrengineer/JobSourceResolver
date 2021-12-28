@@ -1,5 +1,11 @@
+import { HttpClient } from '@angular/common/http';
+import { TransitiveCompileNgModuleMetadata } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import * as Excel from 'exceljs/dist/exceljs.min.js'
+import * as Excel from 'exceljs'
+import { NgxCsvParser, NgxCSVParserError, NgxCsvParserModule } from 'ngx-csv-parser';
+import { JobOpportunity } from 'src/app/models/JobOpportunity';
+import { JobOpportunitiesService } from 'src/app/services/job-opportunities/job-opportunities.service';
+
 
 @Component({
   selector: 'app-job-upload',
@@ -7,69 +13,68 @@ import * as Excel from 'exceljs/dist/exceljs.min.js'
   styleUrls: ['./job-upload.component.css']
 })
 export class JobUploadComponent implements OnInit {
+  csvRecords: any[] = [];
+  primaryId : any[] = [];
+  jobTitle: any[] = [];
+  companyName : any[] = [];
+  companyURL : any[] = [];
+  jobOpps : JobOpportunity[] = [];
 
-  constructor() { }
+  header = false;
+  constructor(private ngxCsvParser: NgxCsvParser, private jobOppService: JobOpportunitiesService) { }
 
   ngOnInit(): void {
+
   }
 
 
-  RefreshData(){
- //   this.uploadService.Refresh_Data().subscribe();
-  }
-  readExcel(event,type){
-    // declare local variables & functions
-    var dataObject = {};
-   // let sendDataJCN = (data) => this.uploadService.Update_dfs_jcn_data(data).subscribe()
-    //let sendDataRaw = (data) => this.uploadService.Update_dfs_raw_data(data).subscribe()
-    //let success = () => this.toastr.success('Data Successfully Uploaded')
-   // let error = () => this.toastr.error('Error uploading file')
-    const workbook = new Excel.Workbook();
-    const arrayBuffer = new Response(event.files[0]).arrayBuffer();
-    // read file
-    arrayBuffer.then(function(data){
-      workbook.xlsx.load(data).then(function (){
+  readExcel(event){
 
-        const worksheet = workbook.getWorksheet(1);
-        for(let i = 1; i <= worksheet.columnCount; i++)
-        {
-          var dataColumn =  worksheet.getColumn(i)
-          let valueHolder :any[];
 
-          dataColumn.eachCell(x =>
+    const files = event.files;
+
+
+    // Parse the file you want to select for the operation along with the configuration
+    this.ngxCsvParser.parse(files[0], { header: this.header, delimiter: ',' })
+      .pipe().subscribe((result: Array<JobOpportunity>) => {
+
+      // console.log('Result', result);
+        this.csvRecords = result;
+        this.csvRecords.shift();
+
+        this.csvRecords.forEach(x => {
+
+
+          this.jobOpps.push(
             {
-              if(x.value == null){x.value = 'NULL'}
-                else{x.value = x.value.toString().slice(0,4000)}
-            })
-          valueHolder = Object.values(dataColumn.values);
-
-          valueHolder.shift()
-
-        // dataObject[dataColumn.values['1']] = valueHolder;
-
-        }
+            id: +x['0'],
+            job_title : x['1'],
+            company_name : x['2'],
+            job_url : x['3']
+            }
+          )
 
 
 
+        })
 
-      }).finally(() => {
-        switch(type){
+        //this.jobOppService(this.jobOpps).
+        this.jobOppService.put(this.jobOpps).subscribe()
+        console.log(this.jobOpps)
 
-          case 'dfs_jcn_data':
-   //         sendDataJCN(dataObject);
-   //         success();
-           break;
-          case 'dfs_raw_data':
-   //         sendDataRaw(dataObject);
-   //         success();
-            break;
-        }
+       // console.log(this.primaryId, this.jobTitle,this.companyName,this.companyURL)
+      },
+
+      (error: NgxCSVParserError) => {
+        console.log('Error', error);
+      });
 
 
-      }).catch(() => {//error()})
 
-      })
-    })
+
+
+
+
 
 
 

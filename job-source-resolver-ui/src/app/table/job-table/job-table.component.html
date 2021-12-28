@@ -1,0 +1,73 @@
+<div>
+    <a [routerLink]="['/homepage']" routerLinkActive="router-link-active">Job Board</a>
+    <p-table #dt [value]="jobOpportunities" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [filterDelay]="0" [globalFilterFields]="['id','job_title','company_name','job_url']">
+        <ng-template pTemplate="caption">
+            <div class="table-header">
+                List of Job Opportunities
+                <span class="p-input-icon-left">
+              <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+          </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+
+                <th pSortableColumn="id">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        id
+                        <p-sortIcon field="id"></p-sortIcon>
+                        <p-columnFilter type="text" field="id" display="menu" class="p-ml-auto"></p-columnFilter>
+                    </div>
+                </th>
+                <th pSortableColumn="job_title">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Job Title
+                        <p-sortIcon field="job_title"></p-sortIcon>
+                        <p-columnFilter type="text" field="job_title" display="menu" class="p-ml-auto"></p-columnFilter>
+                    </div>
+                </th>
+                <th pSortableColumn="company_name">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Company
+                        <p-sortIcon field="company_name"></p-sortIcon>
+                        <p-columnFilter type="text" field="company_name" display="menu" class="p-ml-auto"></p-columnFilter>
+                    </div>
+                </th>
+                <th pSortableColumn="job_url">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Job Url
+                        <p-sortIcon field="job_url"></p-sortIcon>
+                        <p-columnFilter type="text" field="job_url" display="menu" class="p-ml-auto"></p-columnFilter>
+                    </div>
+                </th>
+
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-opportunity>
+            <tr class="p-selectable-row">
+
+                <td>
+                    {{opportunity.id}}
+                </td>
+
+                <td>
+                    {{opportunity.job_title}}
+                </td>
+                <td>
+                    {{opportunity.company_name}}
+                </td>
+                <td>
+                    <a href="{{opportunity.job_url}}"><small>{{opportunity.job_url}}</small></a>
+                </td>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8">No Jobs found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

@@ -1,0 +1,32 @@
+export class sourceDict{
+  Google: string = 'google.com';
+  Glassdoor:string = 'glassdoor.com';
+  AngelList:string = 'angel.co';
+  LinkedIn:string = 'linkedin.com';
+  Dribble:string = 'dribbble.com';
+  Indeed:string = 'indeed.com';
+  Triplebyte:string ='triplebyte.com';
+  Hired:string = 'hired.com';
+  Wayup:string ='wayup.com';
+  YCombinator_Jobs:string = 'ycombinator.com';
+  Work_At_A_Startup :string ='workatastartup.com'
+  Jopwell:string = 'jopwell.com';
+  Tech_Ladies:string = 'hiretechladies.com';
+  Intern_Supply :string = 'intern.supply';
+  Underdog  :string = 'underdog.io';
+  Stella :string ='stella.ai';
+  ZipRecruiter:string = 'ziprecruiter.com';
+  SimplyHired :string ='simplyhired.com';
+  Gamasutra :string = 'gamasutra.com';
+  Huntr_Jobs: string ='huntr.co';
+  Lever :string ='lever.co';
+  Greenhouse :string ='greenhouse.io';
+  Monster:string ='monster.com';
+  Github :string = 'github.com';
+  Stackoverflow:string = 'stackoverflow.com';
+  Employbl:string = 'employbl.com';
+  Who_Is_Hiring :string = 'whoishiring.io';
+  Jobvite :string = 'jobvite.com';
+  SmartRecruiters:string = 'smartrecruiters.com';
+  Government_Jobs:string = 'governmentjobs.com';
+}

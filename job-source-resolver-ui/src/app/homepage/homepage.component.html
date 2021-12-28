@@ -1,5 +1,4 @@
-<div id="homepage" class="p-5">
-
+<div id="homepage" *ngIf="boards; else elseBlock">
 
     <div class="row m-3">
         <div class="col-sm-6">
@@ -16,9 +15,8 @@
 
             <div class="card">
                 <h5 class="text-center bg-light">{{board.name}}</h5>
-
-
-                <a routerLink="/home" routerLinkActive="active" class="card-img-wrapper ">
+                <p class="text-center">Opportunites Available : {{numberOfOpp(board.root_domain)}}</p>
+                <a routerLink="/job-table/{{board.name}}" routerLinkActive="active" [state]="{jobOpps: getJobOpps(board.root_domain)}" class="card-img-wrapper ">
                     <img class="card-img-top" src={{board.logo_file}} alt="">
 
                 </a>
@@ -30,7 +28,7 @@
 
                 <div class="container">
                     <div class="row text-center font-weight-bold">
-                        <p class="card-text"><small class="text-muted">{{board.rating}}</small></p>
+                        <p class="card-text {{determineColor(board.rating)}}">{{board.rating}}</p>
 
                     </div>
                 </div>
@@ -39,3 +37,9 @@
         </div>
     </div>
 </div>
+<ng-template #elseBlock>
+    <div class="text-center" style="margin-top:20%">
+        <p-progressSpinner></p-progressSpinner>
+
+    </div>
+</ng-template>
