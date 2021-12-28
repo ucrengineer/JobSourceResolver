@@ -27,46 +27,18 @@ export class JobUploadComponent implements OnInit {
   constructor(private ngxCsvParser: NgxCsvParser, private jobOppService: JobOpportunitiesService, private boardService : JobBoardsService) { }
 
   ngOnInit(): void {
-    this.sourceDict = {
-      'google.com' : 'Google',
-      'glassdoor.com':'Glassdoor',
-      'angel.co' : 'AngelList',
-      'linkedin.com' : 'LinkedIn',
-      'dribbble.com':'Dribble',
-      'indeed.com' : 'Indeed',
-      'triplebyte.com' : 'Triplbyte',
-      'hired.com':'Hired',
-      'wayup.com':'Wayup',
-      'ycombinator.com':'YCombinator_Jobs',
-      'workatastartup.com':'Work_At_A_Startup',
-      'jopwell.com':'Jopwell',
-      'hiretechladies.com':'Tech_Ladies',
-      'intern.supply':'Intern_Supply',
-      'underdog.io':'Underdog',
-      'stella.ai':'Stella',
-      'ziprecruiter.com':'ZipRecruiter',
-      'simplyhired.com':'SimplyHired',
-      'gamasutra.com':'Gamasutra',
-      'huntr.co':'Huntr_Jobs',
-      'lever.co':'Lever',
-      'greenhouse.io':'Greenhouse',
-      'monster.com':'Monster',
-      'github.com':'Github',
-      'stackoverflow.com':'Stackoverflow',
-      'employbl.com':'Employbl',
-      'whoishiring.io':'Who_Is_Hiring',
-      'jobvite.com':'Jobvite',
-      'smartrecruiters.com':'SmartRecruiters',
-      'governmentjobs.com':'Government_Jobs',
 
-    }
-    this.boardService.get().subscribe(x => this.boards= x)
+    this.boardService.get().subscribe((x) => {this.boards= x},
+
+    err=> console.log('HTTP error', err),
+    () => console.log('HTTP reques completed'))
 
 
   }
 
 
   readExcel(event){
+
 
 
     const files = event.files;
@@ -107,7 +79,6 @@ export class JobUploadComponent implements OnInit {
 
         //this.jobOppService(this.jobOpps).
         this.jobOppService.put(this.jobOpps).subscribe()
-        console.log(this.jobOpps)
 
        // console.log(this.primaryId, this.jobTitle,this.companyName,this.companyURL)
       },

@@ -55,13 +55,11 @@ namespace WebApi.DAL.Repository
             string procName = Constants.PutJobOpportunities;
             var json = JsonConvert.SerializeObject(JobOpps);
             DataTable dataTable = (DataTable)JsonConvert.DeserializeObject(json, (typeof(DataTable)));
-            //var Jobs = new SqlParameter("@JobOpps", SqlDbType.Structured) { Value = dataTable, TypeName = "[type_opportunities]" };
 
             var dyParam = new DynamicParameters();
             dyParam.Add("@JobOpps", dataTable.AsTableValuedParameter("[dbo].[type_opportunities]"));
 
 
-            //dataTable.
 
             try
             {

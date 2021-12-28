@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  local_api : "http://localhost:56161/"
+  local_api : "http://localhost:56161/api/Jobs/"
 
 };
 

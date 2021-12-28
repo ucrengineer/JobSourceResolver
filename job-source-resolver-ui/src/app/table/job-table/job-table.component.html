@@ -4,7 +4,7 @@
         [filterDelay]="0" [globalFilterFields]="['id','job_title','company_name','job_url']">
         <ng-template pTemplate="caption">
             <div class="table-header">
-                List of Job Opportunities from {{jobOpportunities[0].job_source}}
+                List of Job Opportunities from {{board}}
                 <span class="p-input-icon-left">
               <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
           </span>

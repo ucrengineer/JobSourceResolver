@@ -11,12 +11,12 @@ export class JobOpportunitiesService {
   constructor(private http:HttpClient) { }
 
   get(): Observable<JobOpportunity[]>{
-    return this.http.get<JobOpportunity[]>(environment.local_api + "api/Jobs")
+    return this.http.get<JobOpportunity[]>(environment.local_api + "get")
 
   }
 
   put(jobOpps: JobOpportunity[]): Observable<JobOpportunity[]>{
-    return this.http.put<JobOpportunity[]>(environment.local_api + "api/Jobs", jobOpps)
+    return this.http.put<JobOpportunity[]>(environment.local_api + "put", jobOpps)
   }
 
 }

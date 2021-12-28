@@ -20,6 +20,7 @@ export class JobTableComponent implements OnInit {
   siteDomain : sourceDict = new sourceDict();
 
   ngOnInit(): void {
+    this.board = this.route.snapshot.params['id']
 
     if(history.state['jobOpps']== undefined)
     {
@@ -28,7 +29,9 @@ export class JobTableComponent implements OnInit {
         {
           this.jobOpportunities = []
           this.jobOpportunities = getJobs(opportunities,domain)
-        })
+        },
+        err => console.log('HTTP ERROR', err),
+        () => console.log('HTTP request completed'))
      }
      this.jobOpportunities =history.state['jobOpps']
 

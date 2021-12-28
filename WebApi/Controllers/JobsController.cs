@@ -24,6 +24,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
+        [Route("get")]
         public async Task<IActionResult> Get()
         {
             try
@@ -40,6 +41,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
+        [Route("put")]
         public async Task<IActionResult> Put(IEnumerable<JobOpportunity> JobOpps)
         {
             try

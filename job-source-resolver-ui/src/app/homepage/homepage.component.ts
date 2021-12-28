@@ -7,6 +7,7 @@ import { sourceDict } from '../models/sourceDict.model';
 import { JobOpportunity } from '../models/JobOpportunity';
 import { ActivatedRoute } from '@angular/router';
 import { getJobs,getNumber } from '../methods/jobSourceResolution.compent';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-homepage',
@@ -20,12 +21,17 @@ export class HomepageComponent implements OnInit {
   constructor(private jobBoardService: JobBoardsService, private jobOppService: JobOpportunitiesService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.jobBoardService.get().subscribe(x => this.boards = x)
+    this.jobBoardService.get().subscribe((x) => {this.boards = x},
+      err => console.log('HTTP ERROR', err),
+      () => console.log('HTTP request completed')
+      )
     this.jobOppService.get().subscribe((opportunities) =>
     {
         this.jobOpportunities = opportunities;
-      console.log(this.jobOpportunities)
-      })
+      },
+      err => console.log('HTTP ERROR', err),
+      () => console.log('HTTP request completed')
+      )
 
   }
 
