@@ -52,14 +52,18 @@ export class JobUploadComponent implements OnInit {
         this.csvRecords = result;
         this.csvRecords.shift();
 
+        // loop through each job opp
         this.csvRecords.forEach(x => {
           var i = 0;
+          // check to see if a board root_domain is in the job_url
           while (i < this.boards.length){
+              // if there is a root domain in the job url, the source is the board name
               if(String(x['3']).includes(this.boards[i].root_domain)){
                 this.source = this.boards[i].name;
                 break;
               }
               else{
+                // else the source is unknown
                 this.source = 'Unknown';
                 i++;
                 continue;
