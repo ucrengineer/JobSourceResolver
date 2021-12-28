@@ -1,4 +1,4 @@
-export class sourceDict{
+export class  sourceDict{
   Google: string = 'google.com';
   Glassdoor:string = 'glassdoor.com';
   AngelList:string = 'angel.co';

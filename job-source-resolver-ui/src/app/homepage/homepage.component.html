@@ -15,8 +15,8 @@
 
             <div class="card">
                 <h5 class="text-center bg-light">{{board.name}}</h5>
-                <p class="text-center">Opportunites Available : {{numberOfOpp(board.root_domain)}}</p>
-                <a routerLink="/job-table/{{board.name}}" routerLinkActive="active" [state]="{jobOpps: getJobOpps(board.root_domain)}" class="card-img-wrapper ">
+                <p class="text-center">Opportunites Available : {{numberOfOpp(board.name)}}</p>
+                <a routerLink="/job-table/{{board.name}}" routerLinkActive="active" [state]="{jobOpps: getJobOpps(board.name)}" class="card-img-wrapper ">
                     <img class="card-img-top" src={{board.logo_file}} alt="">
 
                 </a>

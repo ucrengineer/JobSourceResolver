@@ -23,7 +23,7 @@ export class JobTableComponent implements OnInit {
 
     if(history.state['jobOpps']== undefined)
     {
-        const domain = this.siteDomain[this.route.snapshot.params['id'].split(' ').join('_').split('?').join('')]
+        const domain = this.route.snapshot.params['id'].split(' ').join('_').split('?').join('')
         this.jobOppService.get().subscribe((opportunities) =>
         {
           this.jobOpportunities = []
