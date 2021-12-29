@@ -9,7 +9,6 @@ b)
 
 c)
 	PrimeNg was used for some UI components. This was used to enhance the speed and asthetics of the application.
-	ngx-csv-parser was used to read/parse the excel file. This package helped with reading in 
-			the excel file.
-	ngx-toaster was used to display information on the application. This was used to ehance the user experience.
+	ngx-csv-parser was used to read/parse the excel file. 
+	ngx-toaster was used to display information on the application. 
 
