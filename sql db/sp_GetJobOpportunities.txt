@@ -1,0 +1,14 @@
+/****** Object:  StoredProcedure [dbo].[sp_GetJobOpportunities]    Script Date: 12/29/2021 7:33:39 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[sp_GetJobOpportunities]
+AS
+BEGIN TRY
+	SELECT * from dbo.opportunities;
+END TRY
+
+BEGIN CATCH
+        SELECT  ERROR_MESSAGE() AS ErrorMessage;  
+END CATCH;

@@ -65,6 +65,7 @@ namespace WebApi
             app.UseSwagger();
             if (env.IsDevelopment())
             {
+                app.UseCors("default");
                 app.UseDeveloperExceptionPage();
                 app.UseSwaggerUI(config =>
                 {
@@ -82,8 +83,11 @@ namespace WebApi
 
             app.UseRouting();
 
-            app.UseCors("default");
-
+          //  app.UseCors("default");
+            app.UseCors(
+                    options => options.WithOrigins("https://jobsourceresolverapp.azurewebsites.net").AllowAnyMethod()
+                    .AllowAnyHeader()
+                    );
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

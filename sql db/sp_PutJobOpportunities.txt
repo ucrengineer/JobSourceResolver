@@ -1,0 +1,53 @@
+/****** Object:  StoredProcedure [dbo].[sp_PutJobOpportunities]    Script Date: 12/29/2021 7:33:55 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[sp_PutJobOpportunities]
+	@JobOpps [type_opportunities] READONLY
+
+AS
+DECLARE @id int;
+DECLARE @job_title VARCHAR(MAX);
+DECLARE @company_name VARCHAR(MAX);
+DECLARE @job_url VARCHAR(MAX);
+DECLARE @job_source VARCHAR(MAX);
+
+DECLARE cursor_jobs CURSOR
+	FOR 
+		select 
+			id,
+			job_title,
+			company_name,
+			job_url,
+			job_source
+		
+		from @JobOpps;
+
+BEGIN TRY
+
+	
+	OPEN cursor_jobs;
+	FETCH NEXT FROM cursor_jobs
+	INTO @id, @job_title,@company_name,@job_url,@job_source;
+
+	while @@FETCH_STATUS =0 
+	BEGIN
+		IF NOT EXISTS(select id from dbo.opportunities where id = @id)
+	  INSERT into dbo.opportunities(id,job_title,company_name,job_url,job_source)
+	  values (@id,@job_title,@company_name,@job_url,@job_source)
+
+		FETCH NEXT FROM cursor_jobs
+		INTO @id, @job_title,@company_name,@job_url,@job_source;
+
+	END;
+
+	CLOSE cursor_jobs;
+	DEALLOCATE cursor_jobs;
+	
+
+END TRY
+
+BEGIN CATCH
+        SELECT  ERROR_MESSAGE() AS ErrorMessage;  
+END CATCH;
